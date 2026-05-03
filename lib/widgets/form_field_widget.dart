@@ -152,7 +152,7 @@ class AppSelectField extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         DropdownButtonFormField<String>(
-          value: validValue,
+          initialValue: validValue,
           onChanged: onChanged,
           isExpanded: true,
           style: const TextStyle(fontSize: 13, color: AppTheme.textPrimary),
