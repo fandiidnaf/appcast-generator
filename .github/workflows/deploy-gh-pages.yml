@@ -1,4 +1,4 @@
-name: Deploy folder B to gh-pages
+name: Build and Deploy Flutter Web
 
 on:
   push:
@@ -13,10 +13,22 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout main branch
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Deploy folder web to gh-pages
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.38.5'
+
+      - run: flutter pub get
+      - run: flutter build web
+
+      - name: Remove base href from index.html
+        run: |
+          if [ -f build/web/index.html ]; then
+            sed -i 's|<base href="/">||g' build/web/index.html
+          fi
+
+      - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
