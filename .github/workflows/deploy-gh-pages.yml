@@ -19,6 +19,7 @@ jobs:
         with:
           flutter-version: '3.38.5'
 
+      - run: flutter clean
       - run: flutter pub get
       - run: flutter build web
 
