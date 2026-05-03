@@ -16,7 +16,7 @@ jobs:
       - name: Checkout main branch
         uses: actions/checkout@v4
 
-      - name: Deploy folder B to gh-pages
+      - name: Deploy folder web to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
