@@ -1,4 +1,4 @@
-# 🛰️ Appcast Generator
+#  Appcast Generator
 
 **Generate Sparkle / flutter_upgrader compatible `appcast.xml` feeds with a beautiful web UI.**
 
@@ -6,7 +6,7 @@ Live editor → real-time XML preview → one-click download.
 
 ---
 
-## ✨ Features
+##  Features
 
 | Feature | Details |
 |---|---|
@@ -31,141 +31,7 @@ Live editor → real-time XML preview → one-click download.
 
 ---
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Flutter SDK ≥ 3.10.0
-- Chrome browser (for web development)
-
-### Run locally
-
-```bash
-# Clone this repo
-git clone https://github.com/yourname/appcast_generator.git
-cd appcast_generator
-
-# Install dependencies
-flutter pub get
-
-# Run on Chrome
-flutter run -d chrome
-
-# Or run on all web
-flutter run -d web-server --web-port 8080
-```
-
-### Build for production
-
-```bash
-flutter build web --release --base-href /
-```
-
-Output is in `build/web/` — deploy to any static host.
-
----
-
-## 🌐 Free Hosting Options
-
-| Platform | Notes |
-|---|---|
-| **Vercel** | `vercel --prod` after `flutter build web` |
-| **Netlify** | Drag & drop `build/web/` folder |
-| **GitHub Pages** | Push `build/web/` to `gh-pages` branch |
-| **Firebase Hosting** | `firebase deploy` |
-| **Cloudflare Pages** | Connect repo, build command: `flutter build web` |
-
-### Deploy to GitHub Pages (automatic)
-
-Create `.github/workflows/deploy.yml`:
-
-```yaml
-name: Deploy to GitHub Pages
-on:
-  push:
-    branches: [main]
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.22.0'
-          channel: 'stable'
-      - run: flutter pub get
-      - run: flutter build web --release --base-href /appcast_generator/
-      - uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/web
-```
-
----
-
-## 📦 Usage with flutter_upgrader
-
-After hosting your `appcast.xml`, use it in your Flutter app:
-
-```dart
-// pubspec.yaml
-dependencies:
-  upgrader: ^10.0.0
-```
-
-```dart
-// main.dart
-import 'package:upgrader/upgrader.dart';
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: UpgradeAlert(
-        upgrader: Upgrader(
-          appcastURL: 'https://yoursite.com/appcast.xml',
-          // Optional: only show updates for a specific channel
-          // appcastChannel: 'beta',
-        ),
-        child: MyHomePage(),
-      ),
-    );
-  }
-}
-```
-
-### Appcast URL tips
-
-- Host at a memorable, stable URL (e.g. `https://yourapp.com/appcast.xml`)
-- Use HTTPS always
-- Set `Content-Type: application/xml` on your server
-- The Atom self-link in Feed Config should match the hosting URL
-
----
-
-## 🗂️ Project Structure
-
-```
-lib/
-├── main.dart                    # App entry point
-├── models/
-│   ├── appcast_item.dart        # Data models (AppcastItem, AppcastFeedConfig)
-│   └── appcast_provider.dart    # State management + XML generator + parser
-├── screens/
-│   └── home_screen.dart         # Main screen with editor + preview layout
-├── utils/
-│   ├── theme.dart               # Colors, typography, Material theme
-│   └── download_helper.dart     # Web download + clipboard utilities
-└── widgets/
-    ├── appcast_item_card.dart    # Per-release editor card (Basic/Advanced/Deltas tabs)
-    ├── feed_config_panel.dart    # Feed-level configuration panel
-    ├── form_field_widget.dart    # Reusable form components
-    └── xml_preview_panel.dart   # Syntax-highlighted live XML preview
-```
-
----
-
-## 📄 Sample Output
+##  Sample Output
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -202,23 +68,6 @@ lib/
 
 ---
 
-## 🧩 Dependencies
-
-```yaml
-dependencies:
-  provider: ^6.1.1        # State management
-  google_fonts: ^6.1.0    # Plus Jakarta Sans + JetBrains Mono
-  universal_html: ^2.2.4  # Web download
-  file_picker: ^8.0.3     # File import
-  uuid: ^4.3.3            # Unique IDs
-  intl: ^0.19.0           # Date formatting
-  xml: ^6.5.0             # XML parsing
-  crypto: ^3.0.3          # Hash utilities
-  path: ^1.9.0            # Path utilities
-```
-
----
-
-## 📝 License
+##  License
 
 MIT — free to use, modify, and deploy.
