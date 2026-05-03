@@ -1,0 +1,1 @@
+ /Users/fandi/work/community/flutter/appcast_generator/.dart_tool/flutter_build/c0649541c8df3f38687acfc6108eafa3/dart_build_result.json:  /Users/fandi/fvm/versions/3.38.5/bin/cache/dart-sdk/version /Users/fandi/work/community/flutter/appcast_generator/.dart_tool/package_config.json /Users/fandi/work/community/flutter/appcast_generator/pubspec.yaml
