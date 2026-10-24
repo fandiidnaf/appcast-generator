@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -13,23 +17,29 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: subosito/flutter-action@v2
+      - name: Set up Flutter from .fvmrc
+        uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.38.5'
+          channel: 'stable'
+          flutter-version-file: '.fvmrc'
+          cache: true
 
-      - run: flutter clean
-      - run: flutter pub get
-      - run: flutter build web
+      - name: Install dependencies
+        run: flutter pub get
 
-      - name: Remove base href from index.html
-        run: |
-          if [ -f build/web/index.html ]; then
-            sed -i 's|<base href="/">||g' build/web/index.html
-          fi
+      - name: Verify static analysis
+        run: flutter analyze
 
-      - name: Deploy to gh-pages
+      - name: Run unit test suite
+        run: flutter test
+
+      - name: Build Flutter Web
+        run: flutter build web --release --base-href "/appcast-generator/"
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
