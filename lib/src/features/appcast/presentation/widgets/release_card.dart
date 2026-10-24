@@ -91,7 +91,7 @@ class _ReleaseCardState extends State<ReleaseCard> {
                   ],
                   const SizedBox(width: 6),
                   TactileBadge(
-                    label: '${item.enclosures.length} binaries',
+                    label: '${item.enclosures.length} package${item.enclosures.length == 1 ? '' : 's'}',
                     color: isDark ? AppColors.darkInfo : AppColors.lightInfo,
                   ),
                   const SizedBox(width: 6),
@@ -148,7 +148,7 @@ class _ReleaseCardState extends State<ReleaseCard> {
                   ),
                   const SizedBox(width: 6),
                   _TabItem(
-                    label: 'Binaries (${item.enclosures.length})',
+                    label: 'Packages (${item.enclosures.length})',
                     index: 1,
                     active: _activeTab,
                     onTap: (i) => setState(() => _activeTab = i),

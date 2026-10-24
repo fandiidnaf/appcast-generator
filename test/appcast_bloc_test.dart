@@ -72,7 +72,7 @@ void main() {
       await Future<void>.delayed(const Duration(milliseconds: 50));
 
       final release = bloc.state.items.firstWhere((i) => i.id == releaseId);
-      expect(release.enclosures.length, 2);
+      expect(release.enclosures.length, 3);
     });
 
     test('XmlImported parses and updates state', () async {

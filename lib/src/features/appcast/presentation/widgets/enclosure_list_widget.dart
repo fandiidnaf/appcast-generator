@@ -30,7 +30,7 @@ class EnclosureListWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Payload Enclosures (${enclosures.length})',
+                  'Platform Packages & Enclosures (${enclosures.length})',
                   style: TextStyle(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w600,
@@ -38,7 +38,7 @@ class EnclosureListWidget extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Add platform binaries (macOS .dmg, Windows .exe, Linux .tar.gz)',
+                  'Attach installers for Android (APK), macOS (DMG/ZIP), Windows (EXE/MSI), Linux, or iOS',
                   style: TextStyle(
                     fontSize: 11,
                     color: isDark ? AppColors.darkTextMuted : AppColors.lightTextMuted,
@@ -48,7 +48,7 @@ class EnclosureListWidget extends StatelessWidget {
             ),
             const Spacer(),
             TactileButton(
-              label: 'Add Binary',
+              label: 'Add Package',
               icon: Icons.add,
               compact: true,
               onPressed: () {
@@ -70,7 +70,7 @@ class EnclosureListWidget extends StatelessWidget {
               ),
             ),
             child: Text(
-              'No enclosures added for this release. Click "Add Binary" to add a download target.',
+              'No packages added for this release. Click "Add Package" to add an Android APK, Windows, or macOS download target.',
               style: TextStyle(
                 fontSize: 12,
                 color: isDark ? AppColors.darkTextMuted : AppColors.lightTextMuted,
@@ -134,7 +134,7 @@ class _EnclosureItemCard extends StatelessWidget {
           Row(
             children: [
               Text(
-                'Binary #$index',
+                'Package #$index',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
@@ -152,7 +152,7 @@ class _EnclosureItemCard extends StatelessWidget {
                 icon: const Icon(Icons.close, size: 14),
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
-                tooltip: 'Delete Binary',
+                tooltip: 'Delete Package',
                 color: isDark ? AppColors.darkDanger : AppColors.lightDanger,
                 onPressed: () {
                   context.read<AppcastBloc>().add(
@@ -164,8 +164,8 @@ class _EnclosureItemCard extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TactileTextField(
-            label: 'Download URL',
-            hint: 'https://example.com/downloads/app-v1.0.0.dmg',
+            label: 'Download / Package URL',
+            hint: 'https://example.com/downloads/app-v1.0.0.apk (or .dmg / .exe)',
             value: enclosure.url,
             isMonospace: true,
             required: true,
@@ -183,12 +183,12 @@ class _EnclosureItemCard extends StatelessWidget {
                   label: 'Target OS',
                   value: enclosure.os,
                   options: const [
-                    ('all', 'All Platforms'),
-                    ('macos', 'macOS'),
-                    ('windows', 'Windows'),
-                    ('linux', 'Linux'),
-                    ('android', 'Android'),
-                    ('ios', 'iOS'),
+                    ('all', 'All Platforms (Universal)'),
+                    ('android', 'Android (APK)'),
+                    ('windows', 'Windows (EXE/MSI)'),
+                    ('macos', 'macOS (DMG/ZIP)'),
+                    ('linux', 'Linux (AppImage/Tar)'),
+                    ('ios', 'iOS (Enterprise/OTA)'),
                   ],
                   onChanged: (v) {
                     context.read<AppcastBloc>().add(

@@ -45,11 +45,19 @@ class AppcastBloc extends Bloc<AppcastEvent, AppcastState> {
       enclosures: [
         AppcastEnclosure(
           id: _uuid.v4(),
-          url: 'https://example.com/app-1.0.0.zip',
-          fileLength: 10485760,
-          mimeType: 'application/zip',
-          os: 'macos',
+          url: 'https://example.com/downloads/app-1.0.0.apk',
+          fileLength: 15728640,
+          mimeType: 'application/vnd.android.package-archive',
+          os: 'android',
           arch: 'all',
+        ),
+        AppcastEnclosure(
+          id: _uuid.v4(),
+          url: 'https://example.com/downloads/app-1.0.0.dmg',
+          fileLength: 31457280,
+          mimeType: 'application/x-apple-diskimage',
+          os: 'macos',
+          arch: 'arm64',
         ),
       ],
     );
