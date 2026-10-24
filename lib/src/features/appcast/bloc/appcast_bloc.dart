@@ -120,12 +120,8 @@ class AppcastBloc extends Bloc<AppcastEvent, AppcastState> {
 
   void _onReleaseReordered(ReleaseReordered event, Emitter<AppcastState> emit) {
     final updated = List<AppcastItem>.from(state.items);
-    int newIdx = event.newIndex;
-    if (event.oldIndex < newIdx) {
-      newIdx -= 1;
-    }
     final item = updated.removeAt(event.oldIndex);
-    updated.insert(newIdx, item);
+    updated.insert(event.newIndex, item);
     _emitComputed(emit, state.feed, updated);
   }
 
